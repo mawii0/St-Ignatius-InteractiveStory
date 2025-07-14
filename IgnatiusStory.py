@@ -55,6 +55,140 @@ scenes = [
     }
 ]
 
+# list of trivia for each scenes
+trivia = {
+    "Pamplona": {
+        "question": "What year was St. Ignatius struck by a cannonball in Pamplona?",
+        "choices": {
+            "a": "1492",
+            "b": "1521",
+            "c": "1572",
+        },
+        "correct": "b",
+        "response": {
+            True: "Wonderful! You're absolutely right! St. Ignatius was struck by a cannonball in 1521 in Pamplona. Great job remembering that important date!",
+            False: "Good try! The correct answer is 1521. Don't worry - dates can be tricky to remember! St. Ignatius was hurt in 1521, and that's when his amazing spiritual journey began. You're doing great!"
+        }
+    },
+    "Loyola": {
+        "question": "What did Ignatius read while recovering that changed his life?",
+        "choices": {
+            "a": "Comic books",
+            "b": "Stories about Jesus and the saints",
+            "c": "Cookbooks",
+        },
+        "correct": "b",
+        "response": {
+            True: "Excellent! You got it right! Ignatius read stories about Jesus and the saints, and they inspired him to want to help others. You're learning so well!",
+            False: "Nice thinking! The answer is stories about Jesus and the saints. While Ignatius was getting better, he read these inspiring stories that helped him decide to serve God. Keep up the great work!"
+        }
+    },
+    "Montserrat and Manresa": {
+        "question": "What special prayers did Ignatius create during his time in the caves?",
+        "choices": {
+            "a": "The Spiritual Exercises",
+            "b": "Magic spells",
+            "c": "Bedtime stories",
+        },
+        "correct": "a",
+        "response": {
+            True: "Amazing! You're correct! Ignatius created the Spiritual Exercises - special prayers and reflections that help people feel closer to God. You're so smart!",
+            False: "Great guess! The answer is the Spiritual Exercises. These are special prayers that Ignatius wrote to help people talk to God and make good choices. You're doing wonderfully!"
+        }
+    },
+    "Jerusalem": {
+        "question": "Where did Ignatius want to stay to follow in Jesus's footsteps?",
+        "choices": {
+            "a": "Paris",
+            "b": "Jerusalem (the Holy Land)",
+            "c": "Spain",
+        },
+        "correct": "b",
+        "response": {
+            True: "Perfect! Yes, Ignatius wanted to stay in Jerusalem, the Holy Land where Jesus lived! You remembered that beautifully!",
+            False: "Good thinking! The answer is Jerusalem, the Holy Land. Ignatius wanted to stay there because that's where Jesus lived and taught. You're learning so much!"
+        }
+    },
+    "Paris": {
+        "question": "What did Ignatius and his friends decide to call their group?",
+        "choices": {
+            "a": "The Super Friends",
+            "b": "The Society of Jesus (Jesuits)",
+            "c": "The Knights of the Round Table",
+        },
+        "correct": "b",
+        "response": {
+            True: "Fantastic! You're absolutely right! They called themselves the Society of Jesus, and people also call them Jesuits. You're such a good listener!",
+            False: "Wonderful try! The answer is the Society of Jesus (also called Jesuits). Ignatius and his friends wanted to serve Jesus together, so they chose this special name. You're doing such a great job!"
+        }
+    },
+    "Rome": {
+        "question": "Who officially approved Ignatius's group in 1540?",
+        "choices": {
+            "a": "The King of Spain",
+            "b": "The Pope",
+            "c": "His mother",
+        },
+        "correct": "b",
+        "response": {
+            True: "Excellent work! The Pope approved their group in 1540! You have such a good memory for these important details!",
+            False: "Great attempt! The Pope was the one who officially approved their group. The Pope is like the leader of the Catholic Church, and he thought Ignatius's group would do wonderful work. You're learning beautifully!"
+        }
+    },
+    "The Final Chapter of St. Ignatius' Life": {
+        "question": "What year did St. Ignatius die peacefully in Rome?",
+        "choices": {
+            "a": "1556",
+            "b": "1600",
+            "c": "1500",
+        },
+        "correct": "a",
+        "response": {
+            True: "Wonderful! You got it right! St. Ignatius died peacefully in 1556, but his good work continued through all his friends. You're so smart!",
+            False: "Nice try! He died in 1556. Even though Ignatius went to heaven, all the good things he started kept helping people around the world. You're doing such a great job learning!"
+        }
+    },
+    "The Society of Jesus After His Death": {
+        "question": "What happened to the Jesuits after Ignatius died?",
+        "choices": {
+            "a": "They disappeared",
+            "b": "They spread around the world helping people",
+            "c": "They became pirates",
+        },
+        "correct": "b",
+        "response": {
+            True: "Amazing! You're absolutely right! The Jesuits spread all around the world to help people and teach them about God. You understand the story so well!",
+            False: "Excellent thinking! The answer is they spread around the world helping people. The Jesuits continued Ignatius's mission of helping others and teaching about God everywhere! You're doing wonderfully!"
+        }
+    },
+    "Ignatian Spirituality and the Jesuits Today": {
+        "question": "How many countries do Jesuits serve in today?",
+        "choices": {
+            "a": "Only 5 countries",
+            "b": "More than 100 countries",
+            "c": "Just Spain",
+        },
+        "correct": "b",
+        "response": {
+            True: "Incredible! You're right! Jesuits serve in more than 100 countries today - that's almost everywhere in the world! You're such a good student!",
+            False: "Great guess! The answer is more than 100 countries! That means Jesuits are helping people almost everywhere in the world, just like Ignatius wanted. You're learning so much!"
+        }
+    },
+    "An Invitation Today": {
+        "question": "What question does Ignatius want us to ask ourselves?",
+        "choices": {
+            "a": "What's for lunch?",
+            "b": "What more can I do for Christ?",
+            "c": "What time is it?",
+        },
+        "correct": "b",
+        "response": {
+            True: "Perfect! You remembered perfectly! Ignatius wants us to ask 'What more can I do for Christ?' - thinking about how we can help others and be kind. You're amazing!",
+            False: "Wonderful try! The question is 'What more can I do for Christ?' This means thinking about how we can be kind, helpful, and good to others every day. You're such a thoughtful student!"
+        }
+    }
+}
+
 class VisualNovelApp(tk.Tk):
     def __init__(self, scenes):
         super().__init__()
@@ -62,42 +196,54 @@ class VisualNovelApp(tk.Tk):
         self.attributes('-fullscreen', True)
         self.configure(bg="white")
         self.minsize(800, 600)
-        self.resizable(True, True)
         self.scenes = scenes
         self.index = 0
 
         # Load and set background image
         self.setup_background()
 
-        # Create a frame for the bottom content with fixed height (increased height)
-        self.bottom_frame = tk.Frame(self, bg="#f0f0f0", relief="flat", height=320)
+        # Create Genshin Impact-style overlay frame with semi-transparency
+        self.bottom_frame = tk.Frame(self, bg='#1a2538', height=270, relief="flat")
         self.bottom_frame.pack_propagate(False)  # Prevent frame from shrinking to fit content
         
-        # Create a top border line that spans the full width
-        self.top_border = tk.Frame(self.bottom_frame, bg="black", height=1)
+        # Create elegant top border with Genshin-style gradient
+        self.top_border = tk.Frame(self.bottom_frame, bg="#2c5aa0", height=3)
         self.top_border.pack(fill="x", side="top")
         
-        self.title_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 26, "bold"), wraplength=600, bg="#f0f0f0", fg="black")
-        self.subtitle_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 18, "italic"), wraplength=600, bg="#f0f0f0", fg="black")
-        self.text_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 16), wraplength=600, justify="left", bg="#f0f0f0", fg="black")
-        self.next_button = tk.Button(self.bottom_frame, text="Next", command=self.next_scene, font=("Arial", 12, "bold"))
+        # Create subtle inner border
+        self.inner_border = tk.Frame(self.bottom_frame, bg="#243447", height=1)
+        self.inner_border.pack(fill="x", side="top")
+        
+        # Create labels with Genshin-style semi-transparent backgrounds
+        self.title_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 28, "bold"), 
+                                wraplength=900, fg="#f0e6d2", bg="#1a2538", anchor="w")
+        self.subtitle_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 20, "italic"), 
+                                wraplength=900, fg="#c9aa71", bg="#1a2538", anchor="w")
+        self.text_label = tk.Label(self.bottom_frame, text="", font=("Georgia", 17), 
+                                wraplength=900, justify="left", fg="#e8dcc6", bg="#1a2538")
+        self.next_button = tk.Button(self.bottom_frame, text="Next", command=self.next_scene, 
+                                    font=("Arial", 14, "bold"), bg="#2c5aa0", fg="#f0e6d2",
+                                    relief="raised", borderwidth=2, padx=25, pady=10,
+                                    activebackground="#4a7bc8", activeforeground="white")
 
         # Position the bottom frame at the very bottom of the screen
         self.bottom_frame.pack(side="bottom", fill="x")
         
         # Pack elements in order: title, subtitle, text
         self.title_label.pack(pady=(25, 0))
-        self.subtitle_label.pack(pady=(0, 30))
-        self.text_label.pack(padx=30, pady=(0, 20))
+        self.subtitle_label.pack(pady=(0, 15))
+        self.text_label.pack(padx=40, pady=(0, 20))
         
         # Position the button absolutely in the bottom right corner
         self.next_button.place(relx=0.95, rely=0.85, anchor="se")
 
         # Bind Escape key to exit fullscreen
         self.bind('<Escape>', lambda e: self.quit())
+        self.bind('<Right>', lambda e: self.next_scene())
 
         self.show_scene()
 
+        
     def setup_background(self):
         """Load and display the background image"""
         try:
@@ -135,9 +281,16 @@ class VisualNovelApp(tk.Tk):
             self.index += 1
             self.show_scene()
         else:
-            self.quit()
+            self.quit() # Should be changed in to an end screen, then it should loop back to the start.
 
-# Run the app
+    # def ask_scene_question():
+    #     if self.scenes[self.index]["title"] in trivia:
+    #         scene_question = 
+    #     else:
+    #         pass
+            
+
+
 if __name__ == "__main__":
     app = VisualNovelApp(scenes)
     app.mainloop()
