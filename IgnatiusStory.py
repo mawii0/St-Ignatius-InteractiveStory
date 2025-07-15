@@ -273,23 +273,126 @@ class VisualNovelApp(tk.Tk):
         self.title_label.config(text=scene["title"])
         self.subtitle_label.config(text=scene["subtitle"])
         self.text_label.config(text=scene["text"])
+
+        self.check_for_trivia() # Check if trivia exists --
+
         if self.index == len(self.scenes) - 1:
             self.next_button.config(text="Finish", command=self.quit)
 
+    def check_for_trivia(self):
+        scene_title = self.scenes[self.index]["title"]  # Fixed: added [self.index]
+
+        if scene_title in trivia:
+            if not hasattr(self, 'quiz_button'):  # Only create if it doesn't exist
+                self.quiz_button = tk.Button(self.bottom_frame, text="Take Quiz", 
+                                        command=self.ask_scene_question,
+                                        font=("Arial", 12, "bold"), 
+                                        bg="#c9aa71", fg="#1a2538",
+                                        relief="raised", borderwidth=2, padx=15, pady=8)
+                self.quiz_button.place(relx=0.05, rely=0.85, anchor="sw")
+        else:
+            if hasattr(self, 'quiz_button'):
+                self.quiz_button.destroy()
+                delattr(self, 'quiz_button')
+
+
     def next_scene(self):
+        # Clean up any existing quiz button when moving to next scene
+        if hasattr(self, 'quiz_button'):
+            self.quiz_button.destroy()
+            delattr(self, 'quiz_button')
+            
         if self.index < len(self.scenes) - 1:
             self.index += 1
             self.show_scene()
         else:
-            self.quit() # Should be changed in to an end screen, then it should loop back to the start.
+            self.quit() # Should be changed in to an end screen, then it should loop back to the start. ------------------------
 
-    # def ask_scene_question():
-    #     if self.scenes[self.index]["title"] in trivia:
-    #         scene_question = 
-    #     else:
-    #         pass
+    def ask_scene_question(self):
+        scene_title = self.scenes[self.index]["title"]
+
+        if scene_title in trivia:
+            question = trivia[scene_title]["question"]
+            choices = trivia[scene_title]["choices"]
+            correct_answer = trivia[scene_title]["correct"]
             
+            # Show the trivia interface
+            self.show_trivia_interface(question, choices, correct_answer, scene_title)
+        else:
+            print("No trivia available for this scene")
 
+    def show_trivia_interface(self, question, choices, correct_answer, scene_title):
+        # Hide main content temporarily
+        self.title_label.pack_forget()
+        self.subtitle_label.pack_forget()
+        self.text_label.pack_forget()
+        
+        # Hide the quiz button temporarily
+        if hasattr(self, 'quiz_button'):
+            self.quiz_button.place_forget()
+        
+        # Show question
+        self.question_label = tk.Label(self.bottom_frame, 
+                                      text=question,
+                                      font=("Georgia", 20, "bold"),
+                                      fg="#f0e6d2", bg="#1a2538",
+                                      wraplength=800)
+        self.question_label.pack(pady=20)
+        
+        # Show answer choices
+        self.choice_frame = tk.Frame(self.bottom_frame, bg="#1a2538")
+        self.choice_frame.pack(pady=10)
+        
+        for key, value in choices.items():
+            choice_btn = tk.Button(self.choice_frame, 
+                                 text=f"{key.upper()}: {value}",
+                                 command=lambda answer=key: self.check_answer(answer, correct_answer, scene_title),
+                                 font=("Arial", 14),
+                                 bg="#2c5aa0", fg="#f0e6d2",
+                                 width=60, pady=2, 
+                                 relief="raised", borderwidth=2)
+            choice_btn.pack(pady=2)
+
+    def check_answer(self, selected_answer, correct_answer, scene_title):
+        is_correct = selected_answer == correct_answer
+        response = trivia[scene_title]["response"][is_correct]
+        
+        if hasattr(self, 'choice_frame'):
+            self.choice_frame.destroy()
+        
+        color = "#4CAF50" if is_correct else "#c9aa71" 
+        
+        self.result_label = tk.Label(self.bottom_frame, text=response,
+                                   font=("Arial", 16, "bold"),
+                                   fg=color, bg="#1a2538",
+                                   wraplength=800, justify="center")
+        self.result_label.pack(pady=20)
+        
+
+        self.after(4000, self.return_to_scene)
+
+    def return_to_scene(self):
+        # Clean up specific trivia widgets
+        if hasattr(self, 'question_label'):
+            self.question_label.destroy()
+            delattr(self, 'question_label')
+        
+        if hasattr(self, 'result_label'):
+            self.result_label.destroy()
+            delattr(self, 'result_label')
+        
+        if hasattr(self, 'choice_frame'):
+            self.choice_frame.destroy()
+            delattr(self, 'choice_frame')
+        
+        # Restore main labels
+        self.title_label.pack(pady=(25, 0))
+        self.subtitle_label.pack(pady=(0, 15))
+        self.text_label.pack(padx=40, pady=(0, 20))
+        
+        # Show quiz button again if trivia exists
+        self.check_for_trivia()
+        
 
 if __name__ == "__main__":
     app = VisualNovelApp(scenes)
