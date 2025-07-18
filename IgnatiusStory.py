@@ -268,6 +268,10 @@ class VisualNovelApp(tk.Tk):
             print(f"Could not load background image: {e}")
             # Continue without background if image fails to load
 
+
+
+            
+
     def show_scene(self):
         scene = self.scenes[self.index]
         self.title_label.config(text=scene["title"])
@@ -280,10 +284,10 @@ class VisualNovelApp(tk.Tk):
             self.next_button.config(text="Finish", command=self.quit)
 
     def check_for_trivia(self):
-        scene_title = self.scenes[self.index]["title"]  # Fixed: added [self.index]
+        scene_title = self.scenes[self.index]["title"] 
 
         if scene_title in trivia:
-            if not hasattr(self, 'quiz_button'):  # Only create if it doesn't exist
+            if not hasattr(self, 'quiz_button'): 
                 self.quiz_button = tk.Button(self.bottom_frame, text="Take Quiz", 
                                         command=self.ask_scene_question,
                                         font=("Arial", 12, "bold"), 
@@ -369,6 +373,13 @@ class VisualNovelApp(tk.Tk):
         self.result_label.pack(pady=20)
         
 
+        self.after(4000, self.remove_bottom_panel)
+
+    def remove_bottom_panel(self):
+        # Hide the entire bottom frame to show only background
+        self.bottom_frame.pack_forget()
+        
+        # Schedule return to scene after another 4 seconds
         self.after(4000, self.return_to_scene)
 
     def return_to_scene(self):
@@ -384,6 +395,9 @@ class VisualNovelApp(tk.Tk):
         if hasattr(self, 'choice_frame'):
             self.choice_frame.destroy()
             delattr(self, 'choice_frame')
+        
+        # Restore the bottom frame
+        self.bottom_frame.pack(side="bottom", fill="x")
         
         # Restore main labels
         self.title_label.pack(pady=(25, 0))
